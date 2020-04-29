@@ -1,0 +1,30 @@
+登录。
+该地址需要Ratelimit
+
+REQ:
+{
+	"username":"邮箱",
+	"password":"密码",
+	"clientToken":"由客户端指定的令牌的 clientToken（可选）",
+	"requestUser":true/false, // 是否在响应中包含用户信息，默认 false
+	"agent":{
+		"name":"Minecraft",
+		"version":1
+	}
+}
+
+
+RES:
+{
+	"accessToken":"令牌的 accessToken",
+	"clientToken":"令牌的 clientToken",
+	"availableProfiles":[ // 用户可用角色列表
+		// ,... 每一项为一个角色（格式见 §角色信息的序列化）
+	],
+	"selectedProfile":{
+		// ... 绑定的角色，若为空，则不需要包含（格式见 §角色信息的序列化）
+	},
+	"user":{
+		// ... 用户信息（仅当请求中 requestUser 为 true 时包含，格式见 §用户信息的序列化）
+	}
+}

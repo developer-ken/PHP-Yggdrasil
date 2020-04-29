@@ -1,0 +1,23 @@
+刷新一个令牌
+
+REQ:
+{
+	"accessToken":"令牌的 accessToken",
+	"clientToken":"令牌的 clientToken（可选）",
+	"requestUser":true/false, // 是否在响应中包含用户信息，默认 false
+	"selectedProfile":{
+		// ... 要选择的角色（可选，格式见 §角色信息的序列化）
+	}
+}
+
+RES:
+{
+	"accessToken":"新令牌的 accessToken",
+	"clientToken":"新令牌的 clientToken",
+	"selectedProfile":{
+		// ... 新令牌绑定的角色，若为空，则不需要包含（格式见 §角色信息的序列化）
+	},
+	"user":{
+		// ... 用户信息（仅当请求中 requestUser 为 true 时包含，格式见 §用户信息的序列化）
+	}
+}
