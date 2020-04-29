@@ -1,6 +1,9 @@
 # A PHP Yggdrasil Server
 
-The project is for my own server, so I'll use my mother-language, not English in readme. Just Googletranslate it if you want English. Sorry for inconvenience.
+The project is for my own server, and since I am in China, I'll use Chinese instead of English. Just Googletranslate it if you want English. Sorry for inconvenience.
+
+This project is still under development and can not be used yet.
+这个项目仍在开发中，还不能使用。
 
 该项目用于我自己的服务器。由于没有接受过专业的训练，我无法保证我的代码拥有良好的稳定性和安全性。请不要将其用于生产环境，我不对这些代码造成的损失负责。
 
