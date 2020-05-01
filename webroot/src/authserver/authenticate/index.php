@@ -21,17 +21,10 @@ if(!$db->checkuserpasswd($json["username"],$json["password"])) Exceptions::doErr
 $uuid_u = $db->getUserUUID($json["username"]);
 $profile = $db->getProfileByOwner($uuid_u);
 $acctoken = $db->presentToken($cli_token,$json["username"]);
-$db->profileBindToken($acctoken,$profile->UUID);
 $dataarr = array(
         "accessToken" => $acctoken,
         "clientToken" => $cli_token,
-        "availableProfiles"=>array( // 用户的属性（数组，每一元素为一个属性）
-            $profile->getArrayFormated()
-        ),
-        "selectedProfile"=>$profile->getArrayFormated()
         );
-
-        if($req_user) $dataarr["user"] = (new User($json["username"],"",$uuid_u,"zh_CN"))->getArrayFormated();
         /*
         {
             "accessToken":"令牌的 accessToken",
@@ -47,5 +40,13 @@ $dataarr = array(
             }
         }
         */
+if($profile!=null){
+    $db->profileBindToken($acctoken,$profile->UUID);
+    $dataarr["availableProfiles"]=array( // 用户的属性（数组，每一元素为一个属性）
+        $profile->getArrayFormated()
+    );
+    $dataarr["selectedProfile"]=$profile->getArrayFormated();
+}
+if($req_user) $dataarr["user"] = (new User($json["username"],"",$uuid_u,"zh_CN"))->getArrayFormated();
 echo json_encode($dataarr);
 ?>
