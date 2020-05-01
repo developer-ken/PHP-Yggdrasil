@@ -1,5 +1,5 @@
 <?php
-include_once "../../includes.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/includes.php";
 
 $must_contain = array(
     "accessToken"

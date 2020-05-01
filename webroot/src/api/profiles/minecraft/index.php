@@ -1,5 +1,5 @@
 <?php
-include_once "../../includes.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/includes.php";
 
 $json = json_decode(file_get_contents('php://input'),true,10);
 if($json == null) Exceptions::doErr(400,"IllegalArgumentException","Not a json string.",json_last_error());

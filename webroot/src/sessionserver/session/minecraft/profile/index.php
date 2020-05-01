@@ -1,5 +1,5 @@
 <?php
-include_once "../../../../includes.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/includes.php";
 
 header("Content-Type: application/json; charset=utf-8");
 $uri = explode('/',$_SERVER["REQUEST_URI"]);

@@ -69,11 +69,11 @@ class Database{
         return $succeed;
     }
 
-    function getUserUUID($username){//约定：有效为1，暂时无效为0，失效为-1
+    function getUserUUID($username){
         $ret = $this->query("SELECT * from Users where username = ? limit 1;",array($username));
         if(count($ret)!=1) return -1;
         //var_dump($ret);
-        return $ret[0]["1"];
+        return $ret[0][0];
     }
 
     function reguserlogin($username){

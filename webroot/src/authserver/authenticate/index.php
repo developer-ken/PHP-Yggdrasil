@@ -1,7 +1,5 @@
 <?php
-ini_set("display_errors","On");
-error_reporting(E_ALL);
-include_once "../../includes.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/includes.php";
 
 $must_contain = array(
     "username","password"
@@ -19,9 +17,9 @@ else $cli_token = $json["clientToken"];
 if(!isset($json["requestUser"])) $req_user = false;
 else $req_user = $json["requestUser"];
 
+if(!$db->checkuserpasswd($json["username"],$json["password"])) Exceptions::doErr(403,"ForbiddenOperationException","Invalid credentials. Invalid username or password.");
 $uuid_u = $db->getUserUUID($json["username"]);
 $profile = $db->getProfileByOwner($uuid_u);
-if(!$db->checkuserpasswd($json["username"],$json["password"])) Exceptions::doErr(403,"ForbiddenOperationException","Invalid credentials. Invalid username or password.");
 $acctoken = $db->presentToken($cli_token,$json["username"]);
 $db->profileBindToken($acctoken,$profile->UUID);
 $dataarr = array(
