@@ -134,9 +134,9 @@ class Database{
     }
 
     function updateAllTokenState(){
-        //30分前的token暂时失效，60分前的token永久失效；永久失效的Token被删除。
-        $this->query_rolls("UPDATE Tokens SET state = ? WHERE DATE(ptimestamp) >= DATE_SUB(NOW(),INTERVAL 30 MINUTE);",array(0));
-        $this->query_rolls("UPDATE Tokens SET state = ? WHERE DATE(ptimestamp) >= DATE_SUB(NOW(),INTERVAL 1 HOUR);",array(-1));
+        //120分前的token暂时失效，30天前的token永久失效；永久失效的Token被删除。
+        $this->query_rolls("UPDATE Tokens SET state = ? WHERE DATE(ptimestamp) >= DATE_SUB(NOW(),INTERVAL 120 MINUTE);",array(0));
+        $this->query_rolls("UPDATE Tokens SET state = ? WHERE DATE(ptimestamp) >= DATE_SUB(NOW(),INTERVAL 30 DAY);",array(-1));
         return $this->query_rolls("delete from Tokens where state = ?;",array(-1))>-1;
     }
 
@@ -182,7 +182,7 @@ class Database{
     }
 
     function closeSession($sid){
-        return $this->query_rolls("delete from Tokens WHERE serverID = ?;",array($sid));
+        return $this->query_rolls("delete from Sessions WHERE serverID = ?;",array($sid));
     }
 
     //无用的//

@@ -1,6 +1,6 @@
 <?php
 ini_set("display_errors","On");
-error_reporting(E_ERROR);
+error_reporting(E_ALL);
 
 //mysql配置//
 $mysql_server = "192.168.1.7";

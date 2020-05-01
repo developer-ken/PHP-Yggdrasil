@@ -1,6 +1,5 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/includes.php";
-
 $pfname = $_GET["username"];
 $serverid = $_GET["serverId"];
 if(isset($_GET["ip"]))$ip = $_GET["ip"];

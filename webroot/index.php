@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_URI"]!="/"){
     $retarr=array(
         "meta"=>$_meta,
         "skinDomains"=>$_skin_domains,
-        "signaturePublickey"=>$encypt_publkey
+        "signaturePublickey"=>"-----BEGIN PUBLIC KEY-----\n".$encypt_publkey."\n-----END PUBLIC KEY-----"
     );
 
     echo json_encode($retarr);
