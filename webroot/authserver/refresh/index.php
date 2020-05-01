@@ -27,19 +27,19 @@ if($db->getTokenState($json["accessToken"])<0)//令牌失效
 
 $owner_name = $db->getTokenOwnername($json["accessToken"]);
 $uuid_u = $db->getUserUUID($owner_name);
-
+$profile = $db->getProfileByOwner($uuid_u);
 $db->setTokenState($json["accessToken"],-1);//旧Token失效
 
 $dataarr = array(
         "accessToken" => $db->presentToken($cli_token,$owner_name),
         "clientToken" => $cli_token,
         "availableProfiles"=>array( // 用户的属性（数组，每一元素为一个属性）
-            $db->getProfileByOwner($uuid_u)
+            $profile->getArrayFormated()
         ),
-        "selectedProfile"=>$db->getProfileByOwner($uuid_u)
+        "selectedProfile"=>$profile->getArrayFormated()
         );
 
-        if($req_user) $dataarr["user"] = new User($owner_name,"",$uuid_u,"zh_CN");
+        if($req_user) $dataarr["user"] = (new User($owner_name,"",$uuid_u,"zh_CN"))->getArrayFormated();
         /*
         {
             "accessToken":"令牌的 accessToken",

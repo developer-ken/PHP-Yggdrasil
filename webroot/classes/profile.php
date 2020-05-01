@@ -27,7 +27,12 @@ class Profile{
 	}
 	
 	public function __toString() {
-        $texture_data = new ProfileProperties("textures",base64_encode($this->texture));
+
+		return json_encode($this->getArrayFormated());
+    }
+
+    public function getArrayFormated(){
+        $texture_data = (new ProfileProperties("textures",base64_encode($this->texture)))->getArrayFormated();
         $dataarr = array(
                 "id" => $this->UUID,
                 "name" => $this->name,
@@ -49,6 +54,6 @@ class Profile{
                     ]
                 }
                 */
-		return json_encode($dataarr);
+        return $dataarr;
     }
 }

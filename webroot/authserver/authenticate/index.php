@@ -20,17 +20,18 @@ if(!isset($json["requestUser"])) $req_user = false;
 else $req_user = $json["requestUser"];
 
 $uuid_u = $db->getUserUUID($json["username"]);
+$profile = $db->getProfileByOwner($uuid_u);
 if(!$db->checkuserpasswd($json["username"],$json["password"])) Exceptions::doErr(403,"ForbiddenOperationException","Invalid credentials. Invalid username or password.");
 $dataarr = array(
         "accessToken" => $db->presentToken($cli_token,$json["username"]),
         "clientToken" => $cli_token,
         "availableProfiles"=>array( // 用户的属性（数组，每一元素为一个属性）
-            $db->getProfileByOwner($uuid_u)
+            $profile->getArrayFormated()
         ),
-        "selectedProfile"=>$db->getProfileByOwner($uuid_u)
+        "selectedProfile"=>$profile->getArrayFormated()
         );
 
-        if($req_user) $dataarr["user"] = new User($json["username"],"",$uuid_u,"zh_CN");
+        if($req_user) $dataarr["user"] = (new User($json["username"],"",$uuid_u,"zh_CN"))->getArrayFormated();
         /*
         {
             "accessToken":"令牌的 accessToken",
