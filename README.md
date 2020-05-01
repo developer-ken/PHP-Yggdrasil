@@ -9,6 +9,9 @@ This project is still under development and can not be used yet.
 
 这个项目旨在使用php+mysql实现可用的Yggdrasil服务端。设计目标是使得其可以在任何支持php的网页空间中运行。但是，在必要时我会调用一些扩展。这些扩展会在下面列出：
 - mysqli
+- openssl
+
+`警告：includes.php中存在一对密钥，您自己使用时应当使用自己生成的密钥替换掉它们，否则可能带来安全问题
 
 欢迎提交Issue或Pull request
 
