@@ -29,9 +29,10 @@ $owner_name = $db->getTokenOwnername($json["accessToken"]);
 $uuid_u = $db->getUserUUID($owner_name);
 $profile = $db->getProfileByOwner($uuid_u);
 $db->setTokenState($json["accessToken"],-1);//旧Token失效
-
+$acctoken = $db->presentToken($cli_token,$owner_name);
+$db->profileBindToken($acctoken,$profile->UUID);
 $dataarr = array(
-        "accessToken" => $db->presentToken($cli_token,$owner_name),
+        "accessToken" => $acctoken,
         "clientToken" => $cli_token,
         "availableProfiles"=>array( // 用户的属性（数组，每一元素为一个属性）
             $profile->getArrayFormated()

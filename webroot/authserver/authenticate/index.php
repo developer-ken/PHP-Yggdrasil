@@ -22,8 +22,10 @@ else $req_user = $json["requestUser"];
 $uuid_u = $db->getUserUUID($json["username"]);
 $profile = $db->getProfileByOwner($uuid_u);
 if(!$db->checkuserpasswd($json["username"],$json["password"])) Exceptions::doErr(403,"ForbiddenOperationException","Invalid credentials. Invalid username or password.");
+$acctoken = $db->presentToken($cli_token,$json["username"]);
+$db->profileBindToken($acctoken,$profile->UUID);
 $dataarr = array(
-        "accessToken" => $db->presentToken($cli_token,$json["username"]),
+        "accessToken" => $acctoken,
         "clientToken" => $cli_token,
         "availableProfiles"=>array( // 用户的属性（数组，每一元素为一个属性）
             $profile->getArrayFormated()

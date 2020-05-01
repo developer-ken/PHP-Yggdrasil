@@ -63,7 +63,7 @@ class Database{
         $encoded = sha1($username.$passwd."THIS IS SAULT");
         $ret = $this->query("SELECT * from Users where username = ? limit 1;",array($username));
         if(count($ret)!=1) return false;
-        $correct_encoded = $ret[0]["2"];
+        $correct_encoded = $ret[0][2];
         $succeed = ($encoded==$correct_encoded);
         if($succeed) $this->reguserlogin($username);
         return $succeed;
@@ -83,13 +83,20 @@ class Database{
     function checkTokenandPfid($access_token,$cli_token,$profile_id){
         $ret = $this->query("SELECT * from Tokens where accessToken = ? limit 1;",array($access_token));
         if(count($ret)!=1) return false;
-        return ($cli_token == $ret[0]["1"] && $profile_id == $ret[0]["2"]);
+        return ($cli_token == $ret[0][1] && $profile_id == $ret[0]["2"]);
     }
 
     function checkToken($access_token,$cli_token){
         $ret = $this->query("SELECT * from Tokens where accessToken = ? limit 1;",array($access_token));
         if(count($ret)!=1) return false;
-        return ($cli_token == $ret[0]["1"]);
+        return ($cli_token == $ret[0][1]);
+    }
+
+    function checkTokenProfile($access_token,$profileuuid){
+        $ret = $this->query("SELECT * from Tokens where accessToken = ? limit 1;",array($access_token));
+        if(count($ret)!=1) return false;
+        //var_dump($ret[0]);
+        return ($profileuuid == $ret[0][2]);
     }
 
     function tokenExistsByAccid($access_token){
@@ -112,7 +119,7 @@ class Database{
         return $ret[0][4];
     }
 
-    function getTokenOwnername($access_token){//约定：有效为1，暂时无效为0，失效为-1
+    function getTokenOwnername($access_token){
         $ret = $this->query("SELECT * from Tokens where accessToken = ? limit 1;",array($access_token));
         if(count($ret)!=1) return -1;
         return $ret[0][5];
@@ -139,12 +146,44 @@ class Database{
         return new Profile($ret[0][2],$ret[0][0],$ret[0][3]);
     }
 
+    function getProfileByName($pname){
+        $ret = $this->query("SELECT * from Profiles where name = ? limit 1;",array($pname));
+        if(count($ret)!=1) return false;
+        return new Profile($ret[0][2],$ret[0][0],$ret[0][3]);
+    }
+
     function getProfileByOwner($owner_uuid){
         $ret = $this->query("SELECT * from Profiles where owner = ? limit 1;",array($owner_uuid));
         if(count($ret)!=1) return false;
         return new Profile($ret[0][2],$ret[0][0],$ret[0][3]);
     }
 
+
+    //会话相关//
+    function putSession($serverid,$acctoken,$ipaddr){
+        return ($this->query_rolls("INSERT INTO Sessions (serverID, accessToken, cli_ipaddr, opentime) VALUES (?, ?, ?, NOW());",array($serverid,$acctoken,$ipaddr))>-1);
+    }
+
+    function checkSession($serverid,$username,$ipaddr="NONE"){
+        $ret = $this->query("SELECT * from Sessions where serverID = ? limit 1;",array($serverid));
+        if(count($ret)!=1) return false;
+        $owner_name = $this->getTokenOwnername($ret[0][1]);
+        $owner_uuid = $this->getUserUUID($owner_name);
+        $cuname = $this->getProfileByOwner($owner_uuid)->name;//效率低下的三次查询 >_<
+        return (
+            ($cuname == $username) &&
+            ($ipaddr == "NONE" || $ipaddr == $ret[0][2])
+        );
+    }
+
+    function updateAllSessionState(){
+        //清除创建超过30S的会话
+        return $this->query_rolls("delete from Tokens WHERE DATE(opentime) >= DATE_SUB(NOW(),INTERVAL 30 SECOND);",array());
+    }
+
+    function closeSession($sid){
+        return $this->query_rolls("delete from Tokens WHERE serverID = ?;",array($sid));
+    }
 
     //无用的//
 

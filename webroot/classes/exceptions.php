@@ -2,6 +2,7 @@
 class Exceptions{
     //生成 sha1WithRSA 签名
     static function doErr($code,$error,$error_message,$cause=null){
+        header("Content-Type: application/json; charset=utf-8");
         header(self::$codes[$code]);
         $arr = array(
             "error"=>$error,
