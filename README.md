@@ -2,8 +2,7 @@
 
 The project is for my own server, and since I am in China, I'll use Chinese instead of English. Just Googletranslate it if you want English. Sorry for inconvenience.
 
-This project is still under development and can not be used yet.
-这个项目仍在开发中，还不能使用。
+喜欢的话右上角给个⭐小星星好吗qaq
 
 该项目用于我自己的服务器。由于没有接受过专业的训练，我无法保证我的代码拥有良好的稳定性和安全性。请不要将其用于生产环境，我不对这些代码造成的损失负责。
 
@@ -11,7 +10,9 @@ This project is still under development and can not be used yet.
 - mysqli
 - openssl
 
-`警告：includes.php中存在一对密钥，您自己使用时应当使用自己生成的密钥替换掉它们，否则可能带来安全问题
+只需导入项目中的.sql文件，然后在/src/includes.php中编辑您的服务器配置，即可使用。
+WARNING:/src/includes.php contains a key pair. You MUST replace it with the one you generated yourself, or your server might be unsafe.
+警告：/src/includes.php中存在一对密钥，您自己使用时应当使用自己生成的密钥替换掉它们，否则可能带来安全问题
 
 欢迎提交Issue或Pull request
 
