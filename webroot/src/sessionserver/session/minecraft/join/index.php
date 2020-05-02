@@ -23,7 +23,7 @@ if(!$db->tokenExistsByAccid($json["accessToken"]))//accessToken错误
     Exceptions::doErr(403,"ForbiddenOperationException","Invalid token.","Token_Not_Exist");
 if(!(isset($json["selectedProfile"])&&$db->checkTokenProfile($json["accessToken"],$json["selectedProfile"])))//profile绑定检查
     Exceptions::doErr(403,"ForbiddenOperationException","Invalid token.","Wrong_Profile_UUID");
-if($db->getTokenState($json["accessToken"])<0)//令牌失效
+if($db->getTokenState($json["accessToken"])<1)//令牌失效
     Exceptions::doErr(403,"ForbiddenOperationException","Invalid token.","Token_Not_Ready");
 
 $db->putSession($json["serverId"],$json["accessToken"],$_SERVER['REMOTE_ADDR']);
