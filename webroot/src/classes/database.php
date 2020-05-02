@@ -178,7 +178,7 @@ class Database{
 
     function updateAllSessionState(){
         //清除创建超过30S的会话
-        return $this->query_rolls("delete from Tokens WHERE DATE(opentime) >= DATE_SUB(NOW(),INTERVAL 30 SECOND);",array());
+        return $this->query_rolls("delete from Sessions WHERE DATE(opentime) >= DATE_SUB(NOW(),INTERVAL 30 SECOND);",array());
     }
 
     function closeSession($sid){
