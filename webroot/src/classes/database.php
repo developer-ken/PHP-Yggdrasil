@@ -135,8 +135,8 @@ class Database{
 
     function updateAllTokenState(){
         //120分前的token暂时失效，30天前的token永久失效；永久失效的Token被删除。
-        $this->query_rolls("UPDATE Tokens SET state = ? WHERE DATE(ptimestamp) <= DATE_SUB(NOW(),INTERVAL 120 MINUTE);",array(0));
-        $this->query_rolls("UPDATE Tokens SET state = ? WHERE DATE(ptimestamp) <= DATE_SUB(NOW(),INTERVAL 30 DAY);",array(-1));
+        $this->query_rolls("UPDATE Tokens SET state = ? WHERE ptimestamp <= DATE_SUB(NOW(),INTERVAL 120 MINUTE);",array(0));
+        $this->query_rolls("UPDATE Tokens SET state = ? WHERE ptimestamp <= DATE_SUB(NOW(),INTERVAL 30 DAY);",array(-1));
         return $this->query_rolls("delete from Tokens where state = ?;",array(-1));
     }
 
