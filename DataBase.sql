@@ -33,7 +33,7 @@ CREATE TABLE `Profiles`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `Sessions`;
 CREATE TABLE `Sessions`  (
-  `serverID` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `serverID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `accessToken` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `cli_ipaddr` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `opentime` timestamp(0) NULL DEFAULT NULL,

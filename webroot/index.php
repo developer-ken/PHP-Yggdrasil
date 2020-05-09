@@ -1,8 +1,13 @@
 <?php
+ini_set("display_errors","On");
+error_reporting(E_ALL | E_STRICT);
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/includes.php";
 
 if($_SERVER["REQUEST_URI"]!="/"){
     $requri = explode("?",$_SERVER["REQUEST_URI"])[0];
+	if(strpos($requri,"sessionserver/session/minecraft/profile")>-1){//Profile分出来处理
+		include("src/sessionserver/session/minecraft/profile/index.php");
+	}else
     include("src".$requri."/index.php");
 }else{
     header("Content-Type: application/json; charset=utf-8");
