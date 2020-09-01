@@ -28,6 +28,12 @@ WARNING:/src/includes.php contains a key pair. You MUST replace it with the one 
 Issues and Pull Requests are welcomed
 欢迎提交Issue或Pull Request
 
+Yet another choice for your server:
+您也可以选择其它实现：
+
+[Erythrocyte3803/PHP-Yggdrasil-Server](https://github.com/Erythrocyte3803/PHP-Yggdrasil-Server)
+
 Referrence
 参考资料
+
 [Yggdrasil 服务端技术规范 | Yggdrasil Document (zh-CN)](https://github.com/yushijinhun/authlib-injector/wiki/Yggdrasil-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83)
