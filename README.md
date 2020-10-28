@@ -8,7 +8,7 @@ The project is very tiny and simple, so it should be easy for you to edit it and
 Star⭐ it if you like my project plz
 喜欢的话右上角给个⭐小星星好吗qaq
 
-⚠WARNING: This project comes whith NO guarantee of the safety or stablity of the project. NEVER use it on production servers. I(the author) take no responsibility if the project crashes or cause any damage to your properties. The code is visible, so after you using it, you agree that you have read through the code and agreed there is no harmful part.
+⚠WARNING: This project comes whith NO guarantee to the safety or stablity of the project. NEVER use it on production servers. I(the author) take no responsibility if the project crashes or cause any damage to your properties. The code is visible, so after you using it, you agree that you have read through the code and agreed there is no harmful part.
 ⚠该项目用于我自己的服务器。由于没有接受过专业的训练，我无法保证我的代码拥有良好的稳定性和安全性。请不要将其用于生产环境，我不对这些代码造成的损失负责。
 代码是开源、可见的。如果您使用本项目，则代表您已经完整阅读代码并认同它不存在有害的部分。
 
